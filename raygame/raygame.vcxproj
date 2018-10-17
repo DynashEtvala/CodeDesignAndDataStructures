@@ -131,12 +131,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterTile.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="MasterTile.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
