@@ -7,7 +7,11 @@ void Sprite::Draw()
 
 Sprite::Sprite(const std::string *filename, const  int cellCount = 1, const float _frameRate = 25.0)
 {
-	spriteCells[0] = LoadTexture(filename->c_str);
+	spriteCells = new Texture2D[cellCount];
+	for (int i = 0; i < cellCount; i++)
+	{
+		spriteCells[i] = LoadTexture(filename[i].c_str);
+	}
 	frameCount = cellCount;
 	frameRate = _frameRate;
 }
