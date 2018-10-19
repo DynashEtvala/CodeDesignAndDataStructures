@@ -133,8 +133,11 @@
   <ItemGroup>
     <ClCompile Include="Barbarian.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EvilEnt.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterTile.cpp" />
+    <ClCompile Include="Necromancer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -143,18 +146,18 @@
   <ItemGroup>
     <ClInclude Include="Barbarian.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EvilEnt.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="MinMax.h" />
     <ClInclude Include="MasterTile.h" />
+    <ClInclude Include="Necromancer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Wizard.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\resources\mappack\PNG\mapTile_017.png" />
-    <Image Include="..\resources\mappack\PNG\mapTile_022.png" />
-    <Image Include="..\resources\mappack\PNG\mapTile_027.png" />
     <Image Include="mapTile_188.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

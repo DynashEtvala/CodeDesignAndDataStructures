@@ -39,6 +39,15 @@
     <ClCompile Include="Barbarian.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Necromancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EvilEnt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -68,17 +77,17 @@
     <ClInclude Include="gameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Necromancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EvilEnt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\resources\mappack\PNG\mapTile_017.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\resources\mappack\PNG\mapTile_022.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\resources\mappack\PNG\mapTile_027.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="mapTile_188.png">
       <Filter>Resource Files</Filter>
     </Image>

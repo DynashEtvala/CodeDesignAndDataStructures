@@ -2,7 +2,7 @@
 
 Player::Player(const std::string &fileName)
 {
-	mySprite = LoadTexture(fileName.c_str);
+	mySprite = LoadTexture(fileName.c_str());
 }
 
 Player::~Player()

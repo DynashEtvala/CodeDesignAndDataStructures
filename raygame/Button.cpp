@@ -15,14 +15,14 @@ void Button::Draw()
 
 bool Button::CheckForClick()
 {
-	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), Rectangle {x, y, spriteCells[0].width, spriteCells[0].height}))
+	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), Rectangle {x, y, (float)(spriteCells[0].width), (float)(spriteCells[0].height)}))
 	{
 		return true;
 	}
 	return false;
 }
 
-Button::Button(const std::string *filename, const Vector2 & position, const  int cellCount = 1) : Sprite(filename, cellCount, 25.0f)
+Button::Button(const std::string *filename, const Vector2 & position, const  int cellCount) : Sprite(filename, cellCount, 25.0f)
 {
 	x = position.x;
 	y = position.y;

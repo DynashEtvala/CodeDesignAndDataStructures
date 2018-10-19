@@ -11,6 +11,11 @@
 
 #include "raylib.h"
 #include "MasterTile.h"
+#include "EvilEnt.h"
+#include "Necromancer.h"
+#include "Button.h"
+#include <vector>
+#include <iterator>
 
 int main()
 {
@@ -25,6 +30,19 @@ int main()
 
 	tileList[0][0] = MasterTile{};
 
+	std::vector<Enemy> enemies;
+
+	int countN = 0;
+	int countE = 0;
+
+	bool play = false;
+
+	Button addN;
+	Button remN;
+	Button addE;
+	Button remE;
+	Button playB;
+
 	SetTargetFPS(60);
 	//--------------------------------------------------------------------------------------
 
@@ -35,6 +53,44 @@ int main()
 		//----------------------------------------------------------------------------------
 		// TODO: Update your variables here
 		//----------------------------------------------------------------------------------
+		if (play)
+		{
+			for (auto enem = enemies.begin(); enem != enemies.end(); enem++)
+			{
+				enem->Update();
+			}
+		}
+		else
+		{
+			if (addN.CheckForClick())
+			{
+				countN++;
+			}
+			if (remN.CheckForClick() && countN != 0)
+			{
+				countN--;
+			}
+			if (addE.CheckForClick())
+			{
+				countN++;
+			}
+			if (remE.CheckForClick())
+			{
+				countN++;
+			}
+			if (playB.CheckForClick())
+			{
+				for (int i = 0; i < countE; i++)
+				{
+					enemies.push_back(EvilEnt{});
+				}
+				for (int i = 0; i < countE; i++)
+				{
+					enemies.push_back(Necromancer{});
+				}
+				play = true;
+			}
+		}
 
 		if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
 		{
