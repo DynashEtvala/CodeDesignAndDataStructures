@@ -48,6 +48,9 @@
     <ClCompile Include="EvilEnt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DialFace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EvilEnt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialFace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

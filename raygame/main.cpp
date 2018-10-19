@@ -14,8 +14,15 @@
 #include "EvilEnt.h"
 #include "Necromancer.h"
 #include "Button.h"
+#include "DialFace.h"
 #include <vector>
 #include <iterator>
+
+typedef DialFace Clock;
+
+Vector2 Clock::position = Vector2{ 100, 100 };
+float Clock::radius = 75;
+float Clock::currentAngle = 0;
 
 int main()
 {
@@ -30,7 +37,7 @@ int main()
 
 	tileList[0][0] = MasterTile{};
 
-	std::vector<Enemy> enemies;
+	std::vector<Enemy*> enemies;
 
 	int countN = 0;
 	int countE = 0;
@@ -43,6 +50,8 @@ int main()
 	Button remE;
 	Button playB;
 
+	Clock clock;
+
 	SetTargetFPS(60);
 	//--------------------------------------------------------------------------------------
 
@@ -53,11 +62,17 @@ int main()
 		//----------------------------------------------------------------------------------
 		// TODO: Update your variables here
 		//----------------------------------------------------------------------------------
+		Clock::currentAngle += GetFrameTime() / 30;
+		if (Clock::currentAngle >= 2)
+		{
+			Clock::currentAngle -= 2;
+		}
+
 		if (play)
 		{
 			for (auto enem = enemies.begin(); enem != enemies.end(); enem++)
 			{
-				enem->Update();
+				(*enem)->Update();
 			}
 		}
 		else
@@ -82,11 +97,11 @@ int main()
 			{
 				for (int i = 0; i < countE; i++)
 				{
-					enemies.push_back(EvilEnt{});
+					enemies.push_back(new EvilEnt{});
 				}
 				for (int i = 0; i < countE; i++)
 				{
-					enemies.push_back(Necromancer{});
+					enemies.push_back(new Necromancer{});
 				}
 				play = true;
 			}
@@ -110,6 +125,8 @@ int main()
 				DrawTexture(tileList[i][j].Background, j * 64, i * 64, tileList[i][j].tint);
 			}
 		}
+
+		clock.DrawFace();
 
 		DrawRectangleLines(0, 0, 64, 64, RED);
 
