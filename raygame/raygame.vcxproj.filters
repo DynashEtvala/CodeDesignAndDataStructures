@@ -92,6 +92,9 @@
     <ClInclude Include="DialFace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="mapTile_188.png">

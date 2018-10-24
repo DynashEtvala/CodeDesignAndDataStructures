@@ -157,6 +157,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="tVector.h" />
     <ClInclude Include="Wizard.h" />
   </ItemGroup>
   <ItemGroup>
