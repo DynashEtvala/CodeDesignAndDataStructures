@@ -13,7 +13,7 @@ class tVector
 public:
 	tVector()                           // initializes the vector's default values
 	{
-		arrCapacity = 1;
+		arrCapacity = 0;
 		arr = new T[arrCapacity];
 		arrSize = 0;
 	};
@@ -26,6 +26,36 @@ public:
 	T *data()                           // returns a pointer to the underlying array
 	{
 		return arr;
+	};
+
+	tVector(const tVector& vec)
+	{
+		arr = new T[vec.arrCapacity];
+		arrCapacity = vec.arrCapacity;
+		arrSize = vec.arrSize;
+		for (int i = 0; i < arrSize; i++)
+		{
+			arr[i] = vec.arr[i];
+		}
+	};
+
+	tVector& operator=(const tVector& vec)
+	{
+		arr = new T[vec.arrCapacity];
+		arrCapacity = vec.arrCapacity;
+		arrSize = vec.arrSize;
+		for (int i = 0; i < arrSize; i++)
+		{
+			arr[i] = vec.arr[i];
+		}
+	};
+
+	T& operator[] (size_t index) 
+	{
+		if (index < arrSize && index >= 0)
+		{
+			return arr[index];
+		}
 	};
 
 	void reserve(size_t newCapacity)    // resizes the vector to at least this many elements
@@ -44,7 +74,11 @@ public:
 
 	void push_back(const T &value)      // adds an element to the end of the vector
 	{
-		if (arrSize == arrCapacity)
+		if (arrSize == 0)
+		{
+			reserve(1);
+		}
+		else if (arrSize == arrCapacity)
 		{
 			reserve(arrCapacity * GROWTH_FACTOR);
 		}
@@ -73,5 +107,10 @@ public:
 	size_t capacity() const             // returns maximum number of elements we can store
 	{
 		return arrCapacity;
+	};
+
+	bool empty()						// Returns true if the vector contains no elements.
+	{
+		return !(arrSize);
 	};
 };

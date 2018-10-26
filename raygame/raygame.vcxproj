@@ -156,7 +156,9 @@
     <ClInclude Include="Necromancer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="tForwardList.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="tStack.h" />
     <ClInclude Include="tVector.h" />
     <ClInclude Include="Wizard.h" />
   </ItemGroup>
