@@ -154,6 +154,7 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="HighScoreEntry.h" />
     <ClInclude Include="HighScoreTable.h" />
+    <ClInclude Include="MergeSort.h" />
     <ClInclude Include="MinMax.h" />
     <ClInclude Include="MasterTile.h" />
     <ClInclude Include="Necromancer.h" />

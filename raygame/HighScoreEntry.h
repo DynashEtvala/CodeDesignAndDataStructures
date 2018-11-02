@@ -11,3 +11,28 @@ public:
 	HighScoreEntry() {};
 	~HighScoreEntry() {};
 };
+
+bool operator==(HighScoreEntry a, HighScoreEntry b)
+{
+	return a.score == b.score;
+}
+
+bool operator<(HighScoreEntry a, HighScoreEntry b)
+{
+	return a.score < b.score;
+}
+
+bool operator>(HighScoreEntry a, HighScoreEntry b)
+{
+	return a.score > b.score;
+}
+
+bool operator<=(HighScoreEntry a, HighScoreEntry b)
+{
+	return a.score <= b.score;
+}
+
+bool operator>=(HighScoreEntry a, HighScoreEntry b)
+{
+	return a.score <= b.score;
+}
