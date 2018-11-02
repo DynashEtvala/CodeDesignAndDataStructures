@@ -136,6 +136,7 @@
     <ClCompile Include="DialFace.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EvilEnt.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HighScoreTable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterTile.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EvilEnt.h" />
     <ClInclude Include="gameObject.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="HighScoreEntry.h" />
     <ClInclude Include="HighScoreTable.h" />
     <ClInclude Include="MergeSort.h" />

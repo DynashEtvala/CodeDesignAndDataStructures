@@ -98,7 +98,7 @@ HighScoreTable::HighScoreTable(std::string fileName, bool insertion)
 		hsVector.back().score = atoi(tokens[1].c_str());
 		hsVector.back().level = atoi(tokens[2].c_str());
 	}
-	for (int i = 0; i < hsVector.size; i++)
+	for (int i = 0; i < hsVector.size(); i++)
 	{
 		for (int j = i; j > 0 && hsVector[j - 1].score > hsVector[j].score; j--)
 		{

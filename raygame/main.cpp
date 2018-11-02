@@ -15,42 +15,33 @@
 #include "Necromancer.h"
 #include "Button.h"
 #include "DialFace.h"
-#include <vector>
+#include "GameState.h"
+#include <deque>
 #include <iterator>
-
-typedef DialFace Clock;
-
-Vector2 Clock::position = Vector2{ 100, 100 };
-float Clock::radius = 75;
-float Clock::currentAngle = 0;
 
 int main()
 {
 	// Initialization
 	//--------------------------------------------------------------------------------------
-	int screenWidth = 640;
-	int screenHeight = 640;
+	int screenWidth = 500;
+	int screenHeight = 1000;
 
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
-	Tile tileList[10][10];
+	float blockSpeed = 250.0f;
+	float blockTimer = 0;
+	float blockSize = 100;
 
-	tileList[0][0] = MasterTile{};
+	std::deque<Rectangle> blocks;
+	blocks.resize(1);
 
-	std::vector<Enemy*> enemies;
+	int colornumber = 0;
 
-	int countN = 0;
-	int countE = 0;
+	float playerSize = (75.0f) / 2;
+	Color playerColor = RED;
+	int playerColumn = 2;
 
-	bool play = false;
-
-	Button addN;
-	Button remN;
-	Button addE;
-	Button remE;
-	Button playB;
-
-	Clock clock;
+	float scoreTime = 0;
 
 	SetTargetFPS(60);
 	//--------------------------------------------------------------------------------------
@@ -62,73 +53,189 @@ int main()
 		//----------------------------------------------------------------------------------
 		// TODO: Update your variables here
 		//----------------------------------------------------------------------------------
-		Clock::currentAngle += GetFrameTime() / 30;
-		if (Clock::currentAngle >= 2)
+		
+		switch (GameState::getState())
 		{
-			Clock::currentAngle -= 2;
-		}
-
-		if (play)
-		{
-			for (auto enem = enemies.begin(); enem != enemies.end(); enem++)
+		default:
+		case MainMenu:
+			if (IsKeyReleased(KEY_ENTER))
 			{
-				(*enem)->Update();
+				GameState::setState(PlayerSelect);
 			}
-		}
-		else
-		{
-			if (addN.CheckForClick())
+			break;
+		case PlayerSelect:
+			if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT))
 			{
-				countN++;
-			}
-			if (remN.CheckForClick() && countN != 0)
-			{
-				countN--;
-			}
-			if (addE.CheckForClick())
-			{
-				countN++;
-			}
-			if (remE.CheckForClick())
-			{
-				countN++;
-			}
-			if (playB.CheckForClick())
-			{
-				for (int i = 0; i < countE; i++)
+				switch (colornumber)
 				{
-					enemies.push_back(new EvilEnt{});
+				default:
+				case 0:
+					if (IsKeyPressed(KEY_LEFT))
+					{
+						playerColor = PURPLE;
+						colornumber = 5;
+					}
+					else
+					{
+						playerColor = ORANGE;
+						colornumber++;
+					}
+					break;
+				case 1:
+					if (IsKeyPressed(KEY_LEFT))
+					{
+						playerColor = RED;
+						colornumber--;
+					}
+					else
+					{
+						playerColor = YELLOW;
+						colornumber++;
+					}
+					break;
+				case 2:
+					if (IsKeyPressed(KEY_LEFT))
+					{
+						playerColor = ORANGE;
+						colornumber--;
+					}
+					else
+					{
+						playerColor = GREEN;
+						colornumber++;
+					}
+					break;
+				case 3:
+					if (IsKeyPressed(KEY_LEFT))
+					{
+						playerColor = YELLOW;
+						colornumber--;
+					}
+					else
+					{
+						playerColor = BLUE;
+						colornumber++;
+					}
+					break;
+				case 4:
+					if (IsKeyPressed(KEY_LEFT))
+					{
+						playerColor = GREEN;
+						colornumber--;
+					}
+					else
+					{
+						playerColor = PURPLE;
+						colornumber++;
+					}
+					break;
+				case 5:
+					if (IsKeyPressed(KEY_LEFT))
+					{
+						playerColor = BLUE;
+						colornumber--;
+					}
+					else
+					{
+						playerColor = RED;
+						colornumber = 0;
+					}
+					break;
 				}
-				for (int i = 0; i < countE; i++)
-				{
-					enemies.push_back(new Necromancer{});
-				}
-				play = true;
 			}
-		}
+			if (IsKeyReleased(KEY_ENTER))
+			{
+				GameState::setState(InGame);
+			}
+			break;
+		case InGame:
+			blockTimer += blockSpeed * GetFrameTime();
+			if (blockTimer >= blockSize * 2)
+			{
+				blocks.push_back(Rectangle{ (rand() % 5)*blockSize, -blockSize, blockSize, blockSize });
+				blockTimer -= blockSize * 2;
+			}
+			if (blocks[0].y > screenHeight)
+			{
+				blocks.pop_front();
+				blockSpeed += blockSpeed * 0.01;
+			}
+			if (IsKeyPressed(KEY_LEFT) && playerColumn != 0)
+			{
+				playerColumn--;
+			}
+			else if (IsKeyPressed(KEY_RIGHT) && playerColumn != 4)
+			{
+				playerColumn++;
+			}
+			for (auto iter = blocks.begin(); iter != blocks.end(); iter++)
+			{
+				iter->y += blockSpeed * GetFrameTime();
+				if (CheckCollisionCircleRec(Vector2{ (float)(playerColumn * 100 + 50), (float)(screenHeight - 150) }, playerSize, Rectangle{ iter->x, iter->y, iter->width, iter->height }))
+				{
+					GameState::setState(GameOver);
+					break;
+				}
+				scoreTime += GetFrameTime();
+			}
+			break;
+		case GameOver:
+			if (IsKeyReleased(KEY_ENTER))
+			{
+				blockSpeed = 250.0f;
+				blockTimer = 0;
 
-		if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
-		{
-			tileList[0][0].CycleTexture();
+				while (blocks.size() != 0)
+				{
+					blocks.pop_back();
+				}
+				blocks.resize(1);
+
+				playerColumn = 2;
+
+				scoreTime = 0;
+				GameState::setState(MainMenu);
+			}
+			break;
 		}
 
 		// Draw
 		//----------------------------------------------------------------------------------
 		BeginDrawing();
 
-		ClearBackground(RAYWHITE);
+		ClearBackground(WHITE);
 
-		for (int i = 0; i < 10; i++)
+		switch (GameState::getState())
 		{
-			for (int j = 0; j < 10; j++)
+		default:
+		case MainMenu:
+			DrawText("PRESS ENTER TO BEGIN", 50, 700, 30, Color{ 0, 0, 0, (unsigned char)(((int)GetTime() % 2) * 255) });
+			break;
+		case PlayerSelect:
+			DrawTriangle(Vector2{ (float)(playerColumn * 100 - 10), (float)(screenHeight - 150) }, Vector2{ (float)(playerColumn * 100 + 10), (float)(screenHeight - 130) }, Vector2{ (float)(playerColumn * 100 + 10), (float)(screenHeight - 170) }, BLACK);
+			DrawTriangle(Vector2{ (float)((playerColumn + 1) * 100 + 9), (float)(screenHeight - 150) }, Vector2{ (float)((playerColumn + 1) * 100 - 11), (float)(screenHeight - 170) }, Vector2{ (float)((playerColumn + 1) * 100 - 11), (float)(screenHeight - 130) }, BLACK);
+		case InGame:
+			DrawCircle(playerColumn * 100 + 50, screenHeight - 150, playerSize, BLACK);
+			DrawCircle(playerColumn * 100 + 50, screenHeight - 150, playerSize - 1, playerColor);
+			for (auto iter = blocks.begin(); iter != blocks.end(); iter++)
 			{
-				DrawTexture(tileList[i][j].Background, j * 64, i * 64, tileList[i][j].tint);
+				DrawRectangleRec(Rectangle{iter->x, iter->y, iter->width, iter->height}, BLACK);
 			}
+			DrawText(std::to_string(scoreTime).c_str(), 183, 950, 30, Color{ 0, 0, 0, (unsigned char)255 });
+			break;
+		case GameOver:
+			DrawCircle(playerColumn * 100 + 50, screenHeight - 150, playerSize, BLACK);
+			DrawCircle(playerColumn * 100 + 50, screenHeight - 150, playerSize - 1, playerColor);
+			for (auto iter = blocks.begin(); iter != blocks.end(); iter++)
+			{
+				DrawRectangleRec(Rectangle{ iter->x, iter->y, iter->width, iter->height }, BLACK);
+			}
+			DrawRectangle(0, 0, screenWidth, screenHeight, { (unsigned char)255, (unsigned char)255, (unsigned char)255, (unsigned char)127 });
+			DrawText("YOUR TIME:", 168, 300, 30, Color{ 0, 0, 0, (unsigned char)255 });
+			DrawText(std::to_string(scoreTime).c_str(), 183, 350, 30, Color{ 0, 0, 0, (unsigned char)255 });
+			DrawText("PRESS ENTER TO RESTART", 35, 750, 30, Color{ 0, 0, 0, (unsigned char)(((int)GetTime() % 2) * 255) });
+			break;
 		}
-
-		clock.DrawFace();
-
-		DrawRectangleLines(0, 0, 64, 64, RED);
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------
