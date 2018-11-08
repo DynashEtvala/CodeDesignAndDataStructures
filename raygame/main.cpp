@@ -176,8 +176,8 @@ int main()
 					GameState::setState(GameOver);
 					break;
 				}
-				scoreTime += GetFrameTime();
 			}
+			scoreTime += GetFrameTime();
 			break;
 		case GameOver:
 			if (IsKeyReleased(KEY_ENTER))

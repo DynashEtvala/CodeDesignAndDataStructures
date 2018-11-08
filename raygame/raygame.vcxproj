@@ -132,35 +132,47 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Barbarian.cpp" />
+    <ClCompile Include="BlueBox.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="DialFace.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EvilEnt.cpp" />
+    <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="FallingFactory.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HighScoreTable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MasterTile.cpp" />
     <ClCompile Include="Necromancer.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RedBox.cpp" />
+    <ClCompile Include="SimpleSprite.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Wizard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Barbarian.h" />
+    <ClInclude Include="BlueBox.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="DialFace.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EvilEnt.h" />
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="FallingFactory.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HighScoreEntry.h" />
     <ClInclude Include="HighScoreTable.h" />
+    <ClInclude Include="IBox.h" />
+    <ClInclude Include="IFactory.h" />
     <ClInclude Include="MergeSort.h" />
     <ClInclude Include="MinMax.h" />
     <ClInclude Include="MasterTile.h" />
     <ClInclude Include="Necromancer.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RedBox.h" />
+    <ClInclude Include="SimpleSprite.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="tForwardList.h" />
     <ClInclude Include="Tile.h" />
